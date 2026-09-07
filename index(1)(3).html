@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVOPIA</title>
+<style>
+body{font-family:Arial,sans-serif;background:#111;color:#eee;margin:0;padding:20px}
+main{max-width:700px;margin:auto}
+button{display:block;width:100%;padding:16px;margin:12px 0;font-size:18px;border-radius:10px;border:0}
+#log{background:#222;padding:15px;min-height:100px;border-radius:10px;margin-top:20px}
+small{color:#bbb}
+</style>
+</head>
+<body>
+<main>
+<h1>EVOPIA</h1>
+<p><strong>Simulador educativo de radioafición</strong></p>
+<p><small>SIMULACIÓN EDUCATIVA — SEÑALES FICTICIAS — NO AUTORIZA TRANSMISIONES REALES.</small></p>
+<hr>
+<p><strong>Estación:</strong> LU4EV — Radio Club Caseros</p>
+<p><strong>Operador:</strong> 001</p>
+<p><strong>Banda:</strong> 40 m · SSB</p>
+<p><strong>Frecuencia simulada:</strong> 7.125 MHz LSB</p>
+
+<button onclick="comenzar()">▶ COMENZAR PRÁCTICA</button>
+<button id="freq" onclick="comprobar()" disabled>🎙️ COMPROBAR FRECUENCIA</button>
+<button id="cq" onclick="cq()" disabled>📡 INICIAR CQ</button>
+
+<div id="log">Esperando el comienzo de la práctica…</div>
+</main>
+<script>
+let controles=0;
+function escribir(t){document.getElementById('log').innerHTML += '<p>'+t+'</p>';}
+function comenzar(){controles=0;document.getElementById('log').innerHTML='<p>Práctica iniciada.</p><p>Antes de transmitir, escuche la frecuencia.</p>';document.getElementById('freq').disabled=false;}
+function comprobar(){if(controles<3){controles++;escribir('LU4EV: «¿Está ocupada la frecuencia?» — escucha '+controles+' de 3.');if(controles===3){escribir('No se recibió respuesta. Puede iniciar el CQ.');document.getElementById('cq').disabled=false;}}}
+function cq(){escribir('LU4EV: «CQ CQ CQ, LU4EV, LU4EV, llamando CQ y a la escucha.»');setTimeout(function(){escribir('ESTACIÓN FICTICIA: «LU4EV, LU4EV, aquí LU 12 Mike, Mendoza. Buenas tardes, adelante.»');},1400);}
+</script>
+</body>
+</html>
